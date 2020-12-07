@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using DDD.Application.DTO;
 using DDD.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DDD.API.Controllers
 {
 
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class ClienteController : ControllerBase
     {
         private readonly IApplicationServiceCliente applicationServiceCliente;
@@ -77,7 +79,7 @@ namespace DDD.API.Controllers
                 }
 
                 applicationServiceCliente.Remove(clienteDTO);
-                return Ok("Cliente Atualremovidoizado com sucesso");
+                return Ok("Cliente Removido com sucesso");
             }
             catch (Exception ex)
             {

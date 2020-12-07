@@ -1,5 +1,6 @@
 ﻿using DDD.Application.DTO;
 using DDD.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace DDD.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class ProdutoController : ControllerBase
     {
         private readonly IApplicationServiceProduto applicationServiceProduto;

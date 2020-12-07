@@ -1,9 +1,7 @@
 ﻿using DDD.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DDD.Infra.Data
 {
@@ -18,6 +16,7 @@ namespace DDD.Infra.Data
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<User> Usuarios { get; set; }
 
         public override int SaveChanges()
         {
@@ -27,7 +26,10 @@ namespace DDD.Infra.Data
                 {
                     entry.Property("DataCadastro").CurrentValue = DateTime.Now;
                 }
-                
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("DataCadastro").CurrentValue = DateTime.Now;
+                }
             }
             
 

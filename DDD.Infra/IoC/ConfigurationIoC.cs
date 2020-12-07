@@ -20,12 +20,16 @@ namespace DDD.Infra.IoC
         {
             builder.RegisterType<ApplicationServiceCliente>().As<IApplicationServiceCliente>();
             builder.RegisterType<ApplicationServiceProduto>().As<IApplicationServiceProduto>();
+            builder.RegisterType<ApplicationServiceUser>().As<IApplicationServiceUser>();
             builder.RegisterType<ServiceCliente>().As<IServiceCliente>();
             builder.RegisterType<ServiceProduto>().As<IServiceProduto>();
+            builder.RegisterType<ServiceUser>().As<IServiceUser>();
             builder.RegisterType<RepositoryCliente>().As<IRepositoryCliente>();
             builder.RegisterType<RepositoryProduto>().As<IRepositoryProduto>();
+            builder.RegisterType<RepositoryUser>().As<IRepositoryUser>();
             builder.RegisterType<MapperCliente>().As<IMapperCliente>();
             builder.RegisterType<MapperProduto>().As<IMapperProduto>();
+            builder.RegisterType<MapperUser>().As<IMapperUser>();
         }
 
     }
