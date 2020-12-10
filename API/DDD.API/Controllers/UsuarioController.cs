@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace DDD.API.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsuarioController : ControllerBase
     {
         private readonly IApplicationServiceUser applicationServiceUser;
-        public UserController(IApplicationServiceUser applicationServiceUser)
+        public UsuarioController(IApplicationServiceUser applicationServiceUser)
         {
             this.applicationServiceUser = applicationServiceUser;
         }

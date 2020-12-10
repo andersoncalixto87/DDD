@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace DDD.API.Controllers
 {
 
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
     public class ClienteController : ControllerBase

@@ -31,8 +31,6 @@ namespace DDD.Infra.Data
                     entry.Property("DataCadastro").CurrentValue = DateTime.Now;
                 }
             }
-            
-
             return base.SaveChanges();
         }
     }
