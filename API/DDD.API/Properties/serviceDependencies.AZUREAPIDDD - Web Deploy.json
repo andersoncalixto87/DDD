@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "apis1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/DDDAPIapi/apis/DDDAPI",
+      "type": "apis.azure"
+    },
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/azuredddapi/databases/DDD",
+      "type": "mssql.azure",
+      "connectionId": "SqlConnection/SqlConnectionString",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

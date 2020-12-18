@@ -1,4 +1,5 @@
 ﻿using FrontDDD.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,13 +21,18 @@ namespace FrontDDD.Controllers
 
         public IActionResult Index()
         {
+            DateTime tokenData = new DateTime(1900, 04, 30, 0, 0, 0);
+            var token = HttpContext.Session.GetString("token");
+            string Data = HttpContext.Session.GetString("tokenData");
+            if (Data != null)
+                tokenData = DateTime.Parse(Data);
+            if (token == null || DateTime.UtcNow > tokenData)
+                return RedirectToAction("Login", "Usuario");
+
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

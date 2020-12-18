@@ -1,16 +1,14 @@
 ﻿@model FrontDDD.Models.ProdutoViewModel
 
 @{
-    ViewData["Title"] = "Cadastro de Produto";
+    ViewData["Title"] = "Edição de Produto (" + Model.Descricao+")";
 }
 
-<h2>Cadastro de Produto</h2>
-
-
+<h2>Edição de Produto</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
@@ -34,6 +32,3 @@
         </form>
     </div>
 </div>
-
-
-

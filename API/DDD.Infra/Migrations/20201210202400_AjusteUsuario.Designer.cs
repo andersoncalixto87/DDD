@@ -4,14 +4,16 @@ using DDD.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DDD.Infra.Migrations
 {
     [DbContext(typeof(DDDContext))]
-    partial class DDDContextModelSnapshot : ModelSnapshot
+    [Migration("20201210202400_AjusteUsuario")]
+    partial class AjusteUsuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

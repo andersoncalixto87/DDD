@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FrontDDD.Controllers
 {
-    public class UserController : Controller
+    public class UsuarioController : Controller
     {
         [HttpGet]
         public IActionResult Login()
@@ -30,7 +30,7 @@ namespace FrontDDD.Controllers
                 client.BaseAddress = new Uri("https://localhost:44398/api/");
                 
                 //HTTP POST
-                var postTask = client.PostAsJsonAsync<UserViewModel>("user/login", user);
+                var postTask = client.PostAsJsonAsync<UserViewModel>("usuario/login", user);
                 postTask.Wait();
                 var result = postTask.Result;
                 
@@ -40,15 +40,54 @@ namespace FrontDDD.Controllers
                     readTask.Wait();
 
                     var token = readTask.Result;
+                    var Date = DateTime.UtcNow.AddHours(2);
                     JObject json = JObject.Parse(token);
                     string strToken = (string)json["token"];
+                    JObject jsonUser = JObject.Parse(json["user"].ToString());
                     HttpContext.Session.SetString("token", strToken);
+                    HttpContext.Session.SetString("user", jsonUser.ToString());
+                    HttpContext.Session.SetString("tokenData", Date.ToString());
                     return RedirectToAction("Index", "Home");
                 }
             }
             ModelState.AddModelError(string.Empty, "Erro no Servidor. Contacte o Administrador.");
 
             return View(user);
+        }
+
+
+        public IActionResult create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult create(UserViewModel usuario)
+        {
+            if (usuario == null)
+            {
+                return StatusCode(400);
+            }
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44398/api/");
+               
+
+                //HTTP POST
+                var postTask = client.PostAsJsonAsync<UserViewModel>("usuario", usuario);
+                postTask.Wait();
+                var result = postTask.Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Login");
+                }
+            }
+
+            ModelState.AddModelError(string.Empty, "Erro no Servidor. Contacte o Administrador.");
+
+            return View(usuario);
         }
     }
 }

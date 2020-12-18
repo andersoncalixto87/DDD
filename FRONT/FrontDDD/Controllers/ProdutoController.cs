@@ -76,5 +76,64 @@ namespace FrontDDD.Controllers
 
             return View(produto);
         }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return StatusCode(400);
+            }
+
+            ProdutoViewModel produto = null;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44398/api/");
+                var token = HttpContext.Session.GetString("token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                //HTTP GET
+                var responseTask = client.GetAsync("produto/" + id.ToString());
+                responseTask.Wait();
+                var result = responseTask.Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<ProdutoViewModel>();
+                    readTask.Wait();
+
+                    produto = readTask.Result;
+                }
+            }
+
+            return View(produto);
+        }
+        [HttpPost]
+        public ActionResult Edit(ProdutoViewModel produto)
+        {
+            if (produto == null)
+            {
+                return StatusCode(400);
+            }
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44398/api/");
+                var token = HttpContext.Session.GetString("token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                //HTTP PUT
+                var putTask = client.PutAsJsonAsync<ProdutoViewModel>("produto", produto);
+                putTask.Wait();
+                var result = putTask.Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(produto);
+        }
+
     }
 }

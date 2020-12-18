@@ -17,6 +17,8 @@ namespace DDD.Application.Mapper
             var user = new User()
             {
                 Id = userDTO.Id,
+                Nome = userDTO.Nome,
+                Email = userDTO.Email,
                 Username = userDTO.Username,
                 Password = userDTO.Password,
                 Role = userDTO.Role
@@ -30,6 +32,8 @@ namespace DDD.Application.Mapper
             var userDto = new UserDTO()
             {
                 Id = user.Id,
+                Nome = user.Nome,
+                Email = user.Email,
                 Username = user.Username,
                 Password = user.Password,
                 Role = user.Role
@@ -43,6 +47,8 @@ namespace DDD.Application.Mapper
             var dto = Users.Select(c => new UserDTO
             {
                 Id = c.Id,
+                Nome = c.Nome,
+                Email = c.Email,
                 Username = c.Username,
                 Password = c.Password,
                 Role = c.Role
